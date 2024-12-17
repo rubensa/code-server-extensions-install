@@ -1,0 +1,253 @@
+{
+  // see: https://github.com/devcontainers/spec/blob/main/docs/specs/devcontainerjson-reference.md
+  // see: https://containers.dev/implementors/json_reference/
+  // see: https://code.visualstudio.com/docs/getstarted/settings#_default-settings
+  // see: https://code.visualstudio.com/docs/editor/variables-reference
+  ////////////////////////
+  // General properties //
+  ////////////////////////
+  // A display name for the container.
+  "name": "code-server-extensions-install",
+  // A set of name-value pairs that sets or overrides environment variables for the devcontainer.json supporting
+  // service / tool (or sub-processes like terminals) but not the container as a whole.
+  "remoteEnv": {
+    // You can reference the env var when running Docker commands from the terminal inside the container.
+    // docker run -it --rm -v "${LOCAL_WORKSPACE_FOLDER//\\/\/}:/workspace" debian bash
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  },
+  // Overrides the user that devcontainer.json supporting services tools / runs as in the container 
+  // (along with sub-processes like terminals, tasks, or debugging).
+  "remoteUser": "vscode",
+  // Overrides the user for all operations run as inside the container.
+  "containerUser": "vscode",
+  // On Linux, the container user's UID/GID will be updated to match your local user.
+  "updateRemoteUserUID": true,
+  // Indicates the type of shell VS Code should use to "probe" for user environment variables to use by default
+  // while debugging or running a task: none (default), interactiveShell, loginShell, or loginInteractiveShell.
+  // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
+  "userEnvProbe": "interactiveShell",
+  // The docker image that will be used to create the container.
+  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
+  ///////////////////////
+  // Lifecycle scripts //
+  ///////////////////////
+  // A command to run when creating the container.
+  // This command is run after "initializeCommand" and before "updateContentCommand".
+  // If this is a single string, it will be run in a shell.
+  // If this is an array of strings, it will be run as a single command without shell.
+  // If this is an object, each provided command will be run in parallel.
+  "onCreateCommand": [
+    ".devcontainer/onCreateCommand.sh"
+  ],
+  // The user command to wait for before continuing execution in the background while the UI is starting up.
+  // The default is "updateContentCommand".
+  "waitFor": "onCreateCommand",
+  /////////////////////////////////
+  // VS Code specific properties //
+  /////////////////////////////////
+  // Configure tool-specific properties.
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // An array of extension IDs that specify the extensions that should be installed inside the container when it is created.
+      "extensions": [
+        /////////
+        // GIT //
+        /////////
+        // Git Graph (https://github.com/mhutchie/vscode-git-graph)
+        "mhutchie.git-graph",
+        // GitLens — Git supercharged (https://github.com/gitkraken/vscode-gitlens)
+        "eamodio.gitlens",
+        // Conventional Commits (https://github.com/vivaxy/vscode-conventional-commits)
+        "vivaxy.vscode-conventional-commits",
+        ///////////////////
+        // DOCUMENTATION //
+        ///////////////////
+        // Draw.io Integration (https://github.com/hediet/vscode-drawio)
+        "hediet.vscode-drawio",
+        // LTeX – LanguageTool grammar/spell checking (https://github.com/valentjn/vscode-ltex)
+        "valentjn.vscode-ltex",
+        // GitHub Markdown Preview (https://github.com/mjbvz/vscode-github-markdown-preview)
+        "bierner.github-markdown-preview",
+        // Markdown Checkboxes (https://github.com/mjbvz/vscode-markdown-checkboxes)
+        "bierner.markdown-checkbox",
+        // Markdown Emoji (https://github.com/mjbvz/vscode-markdown-emoji)
+        "bierner.markdown-emoji",
+        // :emojisense: (https://github.com/mattbierner/vscode-emojisense)
+        "bierner.emojisense",
+        // Markdown Footnotes (https://github.com/mjbvz/vscode-markdown-footnotes)
+        "bierner.markdown-footnotes",
+        // Markdown Preview Github Styling (https://github.com/mjbvz/vscode-github-markdown-preview-style)
+        "bierner.markdown-preview-github-styles",
+        // Markdown Preview Mermaid Support (https://github.com/mjbvz/vscode-markdown-mermaid)
+        "bierner.markdown-mermaid",
+        // Markdown yaml Preamble (https://github.com/mjbvz/vscode-markdown-yaml-preamble)
+        "bierner.markdown-yaml-preamble",
+        // markdownlint (https://github.com/DavidAnson/vscode-markdownlint)
+        "DavidAnson.vscode-markdownlint",
+        // SFDocs Markdown Assistant (https://github.com/forcedotcom/sfdocs-vscode/tree/master/vscode-markdown-assistant)
+        "salesforce.sfdocs-markdown-assistant",
+        // Markdown Table (https://github.com/takumisoft68/vscode-markdown-table)
+        "takumii.markdowntable",
+        // SVG (https://github.com/lishu/vscode-svg2)
+        "jock.svg",
+        // HTMLHint (https://github.com/htmlhint/vscode-htmlhint)
+        "htmlhint.vscode-htmlhint",
+        // Auto Close Tag (https://github.com/formulahendry/vscode-auto-close-tag)
+        "formulahendry.auto-close-tag"
+      ],
+      // Adds default settings.json values into a container/machine specific settings file.
+      "settings": {
+        /////////////////////////////////////////////////////////////////////////////
+        // Auto Close Tag (https://github.com/formulahendry/vscode-auto-close-tag) //
+        /////////////////////////////////////////////////////////////////////////////
+        // To automatically add close tag when </ is typed (same as Sublime Text 3 does).
+        "auto-close-tag.SublimeText3Mode": true,
+        //////////////////////////////////////////////////////////////////////////////////
+        // Conventional Commits (https://github.com/vivaxy/vscode-conventional-commits) //
+        //////////////////////////////////////////////////////////////////////////////////
+        // Control whether the extension should commit files after: forming the message or closing the editor tab.
+        "conventionalCommits.autoCommit": false,
+        // Specify which format will be shown in the gitmoji.
+        "conventionalCommits.emojiFormat": "emoji",
+        // Specify which word will be treated as line breaks in the body. Blank means no line breaks.
+        "conventionalCommits.lineBreak": "\\n",
+        // Control whether the extension should prompt for the scope section.
+        "conventionalCommits.promptScopes": false,
+        ////////////////////////////////////////////////////////////
+        // HTMLHint (https://github.com/htmlhint/vscode-htmlhint) //
+        ////////////////////////////////////////////////////////////
+        // Specify additional language services to be linted
+        "htmlhint.documentSelector": [
+          "html",
+          "markdown"
+        ],
+        // Rules provided by HTMLHint (https://htmlhint.com/docs/user-guide/list-rules)
+        "htmlhint.options": {
+          "tag-pair": true
+        },
+        ///////////////////////////////////////////////////////////////////////////////////////
+        // GitHub Markdown Preview (https://github.com/mjbvz/vscode-github-markdown-preview) //
+        ///////////////////////////////////////////////////////////////////////////////////////
+        // Adds support for rendering the yaml frontmatter as a table.
+        "markdown.previewFrontMatter": "show",
+        ////////////
+        // Editor //
+        ////////////
+        // Controls whether `editor.tabSize#` and `#editor.insertSpaces` will be automatically detected when a file is opened based on the file contents.
+        "editor.detectIndentation": false,
+        // Controls whether the editor should automatically format the pasted content. A formatter must be available and the formatter should be able to format a range in a document.
+        "editor.formatOnPaste": true,
+        // Format a file on save. A formatter must be available, the file must not be saved after delay, and the editor must not be shutting down.
+        "editor.formatOnSave": true,
+        // Controls whether the editor should automatically format the line after typing.
+        "editor.formatOnType": true,
+        // The number of spaces a tab is equal to. This setting is overridden based on the file contents when `editor.detectIndentation` is on.
+        "editor.tabSize": 2,
+        ///////////
+        // Files //
+        ///////////
+        // Configure file associations to languages (for example `"*.extension": "html"`). These have precedence over the default associations of the languages installed.
+        "files.associations": {
+          "extensions.local.json": "jsonc"
+        },
+        // Configure glob patterns for excluding files and folders. For example, the File Explorer decides which files and folders to show or hide based on this setting. Refer to the `search.exclude` setting to define search-specific excludes.
+        "files.exclude": {
+          // Default values
+          "**/.git": true,
+          "**/.svn": true,
+          "**/.hg": true,
+          "**/CVS": true,
+          "**/.DS_Store": true,
+          "**/Thumbs.db": true,
+          // Extra
+          "**/tmp/**": true,
+          "**/.gradle": true,
+          "**/.idea": true,
+          "**/.mvn": true,
+          "**/.classpath": true,
+          "**/.project": true,
+          "**/.settings": true,
+          "**/.factorypath": true
+        },
+        // Configure paths or glob patterns to exclude from file watching.
+        "files.watcherExclude": {
+          // Default values
+          "**/.git/objects/**": true,
+          "**/.git/subtree-cache/**": true,
+          "**/node_modules/*/**": true,
+          "**/.hg/store/**": true,
+          // Extra
+          "**/tmp/**": true,
+          "**/bower_components/**": true,
+          "**/dist/**": true,
+          "**/coverage/**": true
+        },
+        ////////////
+        // Search //
+        ////////////
+        // Configure glob patterns for excluding files and folders in fulltext searches and quick open. Inherits all glob patterns from the `files.exclude` setting.
+        "search.exclude": {
+          // Default values
+          "**/node_modules": true,
+          "**/bower_components": true,
+          "**/*.code-search": true,
+          // Extra
+          "**/target/**": true,
+          "**/dist/**": true,
+          "**/coverage/**": true
+        },
+        ///////////
+        // Debug //
+        ///////////
+        // Global debug launch configuration. Should be used as an alternative to 'launch.json' that is shared across workspaces.
+        "launch": {
+          "configurations": []
+        },
+        ////////////////
+        // Extensions //
+        ////////////////
+        // When enabled, the notifications for extension recommendations will not be shown.
+        "extensions.ignoreRecommendations": true,
+        //////////////
+        // Terminal //
+        //////////////
+        // The default profile used on Linux. This setting will currently be ignored if either `terminal.integrated.shell.linux` or `terminal.integrated.shellArgs.linux` are set.
+        "terminal.integrated.defaultProfile.linux": "bash",
+        // The Linux profiles to present when creating a new terminal via the terminal dropdown. Set the `path` property manually with an optional `args`.
+        // Set an existing profile to `null` to hide the profile from the list, for example: `"bash": null`.
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash",
+            "args": [
+              // Run interactive bash shell in VSCode integrated terminal
+              "-i"
+            ]
+          }
+        },
+        ////////////
+        // Remote //
+        ////////////
+        // When enabled, new running processes are detected and ports that they listen on are automatically forwarded. Disabling this setting will not prevent all ports from being forwarded. Even when disabled, extensions will still be able to cause ports to be forwarded, and opening some URLs will still cause ports to forwarded.
+        "remote.autoForwardPorts": false,
+        /////////////////////////////////////
+        // Default Configuration Overrides //
+        /////////////////////////////////////
+        "[markdown]": {
+          // Controls how lines should wrap. - off: Lines will never wrap.
+          "editor.wordWrap": "off"
+        },
+        ///////////
+        // Emmet //
+        ///////////
+        // An array of languages where Emmet abbreviations should not be expanded.
+        "emmet.excludeLanguages": [],
+        // Enable Emmet abbreviations in languages that are not supported by default. Add a mapping here between the language and Emmet supported language.
+        //  For example: `{"vue-html": "html", "javascript": "javascriptreact"}`
+        "emmet.includeLanguages": {
+          "markdown": "html"
+        }
+      }
+    }
+  }
+}

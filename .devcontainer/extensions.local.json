@@ -1,0 +1,29 @@
+{
+  // An array of extension IDs that specify the extensions that should be installed inside the container when it is created.
+  "extensions": [
+    // Partial Diff (https://github.com/ryu1kn/vscode-partial-diff)
+    "ryu1kn.partial-diff",
+    // Compare Folders (https://github.com/moshfeu/vscode-compare-folders)
+    "moshfeu.compare-folders",
+    // ENV (https://github.com/IronGeek/vscode-env)
+    "irongeek.vscode-env",
+    // GitHub Pull Requests and Issues (https://github.com/Microsoft/vscode-pull-request-github)
+    "github.vscode-pull-request-github",
+    // Atlassian for VS Code (https://bitbucket.org/atlassianlabs/atlascode)
+    "Atlassian.atlascode",
+    // CircleCI (https://discuss.circleci.com/c/ecosystem/vs-code)
+    "circleci.circleci",
+    // GitHub Actions (https://github.com/github/vscode-github-actions)
+    "github.vscode-github-actions",
+    // GitHub Copilot (https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
+    "GitHub.copilot",
+    // Diff Viewer (https://github.com/caponetto/vscode-diff-viewer)
+    "caponetto.vscode-diff-viewer",
+    // Excel Viewer (https://github.com/wijmo/gc-excelviewer)
+    "grapecity.gc-excelviewer",
+    // ANSI Colors (https://github.com/iliazeus/vscode-ansi)
+    "iliazeus.vscode-ansi",
+    // REST Client (https: //github.com/Huachao/vscode-restclient)
+    "humao.rest-client"
+  ]
+}
